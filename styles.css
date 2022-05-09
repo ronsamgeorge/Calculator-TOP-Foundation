@@ -1,0 +1,40 @@
+h1 {
+    text-align: center;
+}
+
+
+.body-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.main-container{
+    width : 450px;
+    height: 500px;
+    border : 2px solid grey;
+    background-color: grey;
+    border-radius: 2%;
+}
+
+.display-container{
+    border: 5px solid black;
+    height : 80px;
+    margin : 5px;
+    background-color: #E3DFDE;
+}
+
+.btn-row{
+    border: 2px solid black;
+    flex : 1;
+    margin : 2px;
+    
+}
+
+.button-container{
+    display : flex;
+    flex-direction: column;
+    height: 400px;
+    gap : 2px;
+}
