@@ -23,7 +23,19 @@ h1 {
     height : 80px;
     margin : 5px;
     background-color: #E3DFDE;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding-right : 8px;
 }
+
+.display-out{
+    font-size: 32px;
+    font-weight: bolder;
+    margin: 0;
+    padding : 8px;
+}
+
 
 .button-container{
     display : flex;
