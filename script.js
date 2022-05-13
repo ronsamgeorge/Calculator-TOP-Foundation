@@ -5,7 +5,7 @@ function display(data=0){
     const displayResult = document.querySelector('.display-out');
     console.log(data);
 
-    if(displayResult.textContent === "0" || typeof data !== 'number'){
+    if (displayResult.textContent === "0" || typeof data !== 'number'  || isNaN(Number(displayResult.textContent))){
         displayResult.textContent = data;
     }else {
         displayResult.textContent += data;
