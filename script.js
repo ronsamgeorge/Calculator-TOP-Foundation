@@ -3,13 +3,31 @@
 // Changes the text displayed in the Calculator when button is pressed
 function display(data=0){
     const displayResult = document.querySelector('.display-out');
-    console.log(data);
+    //console.log(data);
 
     if (displayResult.textContent === "0" || typeof data !== 'number'  || isNaN(Number(displayResult.textContent))){
         displayResult.textContent = data;
     }else {
         displayResult.textContent += data;
     }
+}
+
+// Operation Functions
+
+function add(operand1, operand2){
+    return Number(operand1) + Number(operand2);
+}
+
+function substract(operand1, operand2){
+    return Number(operand1) - Number(operand2);
+}
+
+function multiply(operand1,operand2){
+    return Number(operand1) * Number(operand2);
+}
+
+function divide(operand1,operand2){
+    return Number(operand1) / Number(operand2);
 }
 
 
@@ -35,7 +53,9 @@ function onNumber(button){
 
 function onOperations(){
     const operationDisplay = getTextContent(this);
+    console.log(this.id);
     display(operationDisplay);
+
 }
 
 
