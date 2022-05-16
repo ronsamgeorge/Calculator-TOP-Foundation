@@ -35,6 +35,7 @@ function divide(operand1,operand2){
 function clearDisplay(){
     const displayResult = document.querySelector('.display-out');
     displayResult.textContent = 0;
+    operand = [];
 }
 
 // gets the  number or the operator clicked
@@ -54,8 +55,17 @@ function onNumber(button){
 function onOperations(){
     const operationDisplay = getTextContent(this);
     console.log(this.id);
-    display(operationDisplay);
 
+    const previousText = document.querySelector(".display-out").textContent;
+
+    if(isNaN(Number(previousText))){
+        console.log("ERror");
+    }else{
+        operand.push(Number(previousText));
+        display(operationDisplay);
+    }
+
+    console.log(operand);
 }
 
 
@@ -66,6 +76,7 @@ numButtons.forEach(button => button.addEventListener('click', onNumber));
 
 const operationButtons = document.querySelectorAll('.operations');
 operationButtons.forEach(button => button.addEventListener('click', onOperations));
+
 
 const ac = document.querySelector('#ac');
 ac.addEventListener('click',clearDisplay);
