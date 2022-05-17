@@ -15,7 +15,11 @@ function display(data=0){
 // Operation Functions
 
 function add(operand1, operand2){
-    return Number(operand1) + Number(operand2);
+
+    const result = Number(operand1) + Number(operand2);
+    console.log(operand);
+   // operand = [];
+    return result;
 }
 
 function substract(operand1, operand2){
@@ -53,16 +57,24 @@ function onNumber(button){
 
 
 function onOperations(){
-    const operationDisplay = getTextContent(this);
+    let operationDisplay = getTextContent(this);
     console.log(this.id);
-
+   
     const previousText = document.querySelector(".display-out").textContent;
+    display(operationDisplay); 
+    
 
     if(isNaN(Number(previousText))){
-        console.log("ERror");
+        console.log("Error");
     }else{
         operand.push(Number(previousText));
-        display(operationDisplay);
+
+        if(operand.length == 2 ){
+            operationDisplay = Number(add(operand[0],operand[1]));
+            operand = [];
+            display(operationDisplay); 
+        }
+       
     }
 
     console.log(operand);
@@ -71,12 +83,13 @@ function onOperations(){
 
 let operand = [];
 let operation = "";
+
+
 const numButtons = document.querySelectorAll('.numbers');
 numButtons.forEach(button => button.addEventListener('click', onNumber));
 
 const operationButtons = document.querySelectorAll('.operations');
 operationButtons.forEach(button => button.addEventListener('click', onOperations));
-
 
 const ac = document.querySelector('#ac');
 ac.addEventListener('click',clearDisplay);
