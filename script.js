@@ -35,6 +35,23 @@ function divide(operand1,operand2){
 }
 
 
+// calls the correct operation depending on the id of  the button clicked
+function callOperation(operationId){
+
+    let result; 
+    if (operationId === "addition"){
+        result = add(operand[0] ,operand[1]);
+    } else if (operationId === "substraction") {
+        result = substract(operand[0],operand[1]);
+    }else if( operationId === "multiplication"){
+        result = multiply(operand[0],operand[1]);
+    }else if(operationId === "division"){
+        result = divide(operand[0],operand[1]);
+    }
+
+    return result;
+}
+
 // When AC button is pressed and set the display are to 0
 function clearDisplay(){
     const displayResult = document.querySelector('.display-out');
@@ -68,16 +85,17 @@ function onOperations(){
         console.log("Error");
     }else{
         operand.push(Number(previousText));
-
         if(operand.length == 2 ){
-            operationDisplay = Number(add(operand[0],operand[1]));
+
+            operationDisplay = callOperation(operation);
             operand = [];
+            operation = this.id;
             display(operationDisplay); 
+        }else{
+            operation = this.id;
         }
        
     }
-
-    console.log(operand);
 }
 
 
