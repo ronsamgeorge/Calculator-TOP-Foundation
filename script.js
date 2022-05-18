@@ -75,9 +75,11 @@ function onNumber(button){
 
 function onOperations(){
     let operationDisplay = getTextContent(this);
-    console.log(this.id);
+    //console.log(this.id);
+    console.log(operation);
    
     const previousText = document.querySelector(".display-out").textContent;
+
     display(operationDisplay); 
     
 
