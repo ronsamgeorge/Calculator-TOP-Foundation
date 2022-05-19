@@ -100,7 +100,7 @@ function onOperations(){
     }
 }
 
-
+let expression = [];
 let operand = [];
 let operation = "";
 
