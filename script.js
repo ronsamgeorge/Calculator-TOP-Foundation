@@ -81,7 +81,7 @@ function getPreviousNumber(){
 function onNumber(button){
 
     const numberDisplay = getTextContent(this);
-    display(Number(numberDisplay));
+    display((numberDisplay).replace(" ",''));
     previousInput = "num";
 }
 
@@ -100,8 +100,6 @@ function onOperations(){
     console.log(operand);
     previousInput = "ops";
     
-   // display(getTextContent(this));
-
     expression.push(this.id);
     
 
@@ -113,40 +111,9 @@ function onOperations(){
         operation = this.id;
         display(result);
     }
-
-
-    //console.log(expression);
-    console.log(operand);
-    //console.log("operation " + operation);
     
 }
 
-// function onOperations(){
-//     let operationDisplay = getTextContent(this);
-//     //console.log(this.id);
-//     console.log(operation);
-   
-//     const previousText = document.querySelector(".display-out").textContent;
-
-//     display(operationDisplay); 
-    
-
-//     if(isNaN(Number(previousText))){
-//         console.log("Error");
-//     }else{
-//         operand.push(Number(previousText));
-//         if(operand.length == 2 ){
-
-//             operationDisplay = callOperation(operation);
-//             operand = [];
-//             operation = this.id;
-//             display(operationDisplay); 
-//         }else{
-//             operation = this.id;
-//         }
-       
-//     }
-// }
 
 let expression = [];
 let operand = [];
@@ -161,6 +128,6 @@ const operationButtons = document.querySelectorAll('.operations');
 operationButtons.forEach(button => button.addEventListener('click', onOperations));
 
 const ac = document.querySelector('#ac');
-ac.addEventListener('click',clearDisplay);
+ac.addEventListener('click',clearDisplay);         
 
 display();
