@@ -5,7 +5,7 @@ function display(data=0){
     const displayResult = document.querySelector('.display-out');
     //console.log(data);
 
-    if (displayResult.textContent === "0" || typeof data !== 'number'  || isNaN(Number(displayResult.textContent))){
+    if (displayResult.textContent === "0" || typeof data !== 'number'  || isNaN(Number(displayResult.textContent)) || (isNaN(Number(expression[expression.length -1])))){
         displayResult.textContent = data;
     }else {
         displayResult.textContent += data;
@@ -17,7 +17,7 @@ function display(data=0){
 function add(operand1, operand2){
 
     const result = Number(operand1) + Number(operand2);
-    console.log(operand);
+    //console.log(operand);
    // operand = [];
     return result;
 }
@@ -57,6 +57,8 @@ function clearDisplay(){
     const displayResult = document.querySelector('.display-out');
     displayResult.textContent = 0;
     operand = [];
+    expression = [];
+    operation = null;
 }
 
 // gets the  number or the operator clicked
@@ -64,6 +66,13 @@ function getTextContent(nodeObject){
     const node = document.querySelector("#" + nodeObject.id);
     const text = node.childNodes[1].textContent;
     return (text);
+}
+
+
+//function
+function getPreviousNumber(){
+    const previousNumber = document.querySelector('.display-out').textContent;
+    return (previousNumber);
 }
 
 function onNumber(button){
@@ -74,35 +83,67 @@ function onNumber(button){
 
 
 function onOperations(){
-    let operationDisplay = getTextContent(this);
-    //console.log(this.id);
-    console.log(operation);
-   
-    const previousText = document.querySelector(".display-out").textContent;
 
-    display(operationDisplay); 
+    const getNumber = getPreviousNumber();
+    operand.push(getNumber);
+    expression.push(getNumber);
+    console.log(operand);
+    
+    if ((isNaN(Number(expression[expression.length -1]))) && expression.length>0){
+        console.log("Can't Chain two operations");
+        return ;
+    }
+   // display(getTextContent(this));
+
+    expression.push(this.id);
     
 
-    if(isNaN(Number(previousText))){
-        console.log("Error");
+    if (operation === null){
+         operation = this.id;
     }else{
-        operand.push(Number(previousText));
-        if(operand.length == 2 ){
-
-            operationDisplay = callOperation(operation);
-            operand = [];
-            operation = this.id;
-            display(operationDisplay); 
-        }else{
-            operation = this.id;
-        }
-       
+        result = callOperation(operation);
+        operand = [result];
+        operation = this.id;
+        display(result);
     }
+
+
+    //console.log(expression);
+    console.log(operand);
+    //console.log("operation " + operation);
+    
 }
+
+// function onOperations(){
+//     let operationDisplay = getTextContent(this);
+//     //console.log(this.id);
+//     console.log(operation);
+   
+//     const previousText = document.querySelector(".display-out").textContent;
+
+//     display(operationDisplay); 
+    
+
+//     if(isNaN(Number(previousText))){
+//         console.log("Error");
+//     }else{
+//         operand.push(Number(previousText));
+//         if(operand.length == 2 ){
+
+//             operationDisplay = callOperation(operation);
+//             operand = [];
+//             operation = this.id;
+//             display(operationDisplay); 
+//         }else{
+//             operation = this.id;
+//         }
+       
+//     }
+// }
 
 let expression = [];
 let operand = [];
-let operation = "";
+let operation = null;
 
 
 const numButtons = document.querySelectorAll('.numbers');
