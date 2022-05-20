@@ -5,7 +5,7 @@ function display(data=0){
     const displayResult = document.querySelector('.display-out');
     //console.log(data);
 
-    if (displayResult.textContent === "0" || typeof data !== 'number'  || isNaN(Number(displayResult.textContent)) || (isNaN(Number(expression[expression.length -1])))){
+    if (displayResult.textContent === "0" || previousInput !== "num"){
         displayResult.textContent = data;
     }else {
         displayResult.textContent += data;
@@ -31,6 +31,9 @@ function multiply(operand1,operand2){
 }
 
 function divide(operand1,operand2){
+    if (operand2 === '0'){
+        return "ERROR";
+    }
     return Number(operand1) / Number(operand2);
 }
 
@@ -79,20 +82,24 @@ function onNumber(button){
 
     const numberDisplay = getTextContent(this);
     display(Number(numberDisplay));
+    previousInput = "num";
 }
 
 
 function onOperations(){
 
+
+    if (previousInput === "ops"){
+        console.log("Can't Chain two operations");
+        return ;
+    }
+
     const getNumber = getPreviousNumber();
     operand.push(getNumber);
     expression.push(getNumber);
     console.log(operand);
+    previousInput = "ops";
     
-    if ((isNaN(Number(expression[expression.length -1]))) && expression.length>0){
-        console.log("Can't Chain two operations");
-        return ;
-    }
    // display(getTextContent(this));
 
     expression.push(this.id);
@@ -144,6 +151,7 @@ function onOperations(){
 let expression = [];
 let operand = [];
 let operation = null;
+let previousInput = "";
 
 
 const numButtons = document.querySelectorAll('.numbers');
